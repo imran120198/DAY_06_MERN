@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import EditProfile from "./Components/EditProfile";
+import UserProfile from "./Components/UserProfile";
 
 function App() {
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  const user = {
+    name: "Imran Khan",
+    email: "test@example.com",
+    bio: "Full Stack Web Developer",
+  };
+
+  const toggleMode = () => {
+    setIsEditMode(!isEditMode);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        width: "30%",
+        margin: "auto",
+        flexDirection: "column",
+        border:"1px solid black",
+        marginTop:"50px"
+      }}
+    >
+      <button
+        onClick={toggleMode}
+      >
+        {isEditMode ? "View Mode" : "Edit Mode"}
+      </button>
+      {isEditMode ? <EditProfile {...user} /> : <UserProfile {...user} />}
     </div>
   );
 }
